@@ -316,10 +316,13 @@
       }
       .type-pill .ico {
         font-size: 15px;
-        display: block;
-        margin-bottom: 4px;
-        opacity: 0.7;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 6px;
+        opacity: 0.75;
         line-height: 1;
+        height: 18px;
       }
       .type-pill .lbl {
         font-size: 10px;
@@ -861,9 +864,29 @@
         border-color: var(--border-2);
         background: var(--surface-2);
       }
-      .btn .icn {
+      .btn .icn,
+      .filebtn .icn {
         font-size: 12px;
         line-height: 1;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .icn svg,
+      .btn > svg {
+        width: 14px;
+        height: 14px;
+        display: block;
+      }
+      .type-pill .ico {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .type-pill .ico svg {
+        width: 18px;
+        height: 18px;
+        display: block;
       }
       .btn.primary {
         background: var(--accent);
@@ -1246,10 +1269,14 @@
         background: var(--surface);
         border: 1px solid var(--border);
         border-radius: var(--radius);
-        transition: border-color 0.12s;
+        transition:
+          border-color 0.12s,
+          background 0.12s;
+        cursor: pointer;
       }
       .saved-item:hover {
         border-color: var(--border-2);
+        background: var(--surface-2);
       }
       .saved-item .thumb {
         width: 56px;
@@ -1591,34 +1618,93 @@
 
         <div class="types qr-only" id="types">
           <button class="type-pill active" data-type="text">
-            <span class="ico">¶</span><span class="lbl">Text</span>
+            <span class="ico">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 4h10M3 8h10M3 12h7" />
+              </svg>
+            </span>
+            <span class="lbl">Text</span>
           </button>
           <button class="type-pill" data-type="url">
-            <span class="ico">⇗</span><span class="lbl">URL</span>
+            <span class="ico">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 9.5a2.6 2.6 0 0 0 3.7 0l2.3-2.3a2.6 2.6 0 1 0-3.7-3.7l-.8.8" />
+                <path d="M9 6.5a2.6 2.6 0 0 0-3.7 0L3 8.8a2.6 2.6 0 1 0 3.7 3.7l.8-.8" />
+              </svg>
+            </span>
+            <span class="lbl">URL</span>
           </button>
           <button class="type-pill" data-type="wifi">
-            <span class="ico">≋</span><span class="lbl">Wi-Fi</span>
+            <span class="ico">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 6.5a8.5 8.5 0 0 1 12 0" />
+                <path d="M4.2 9a5.5 5.5 0 0 1 7.6 0" />
+                <circle cx="8" cy="12" r="1" fill="currentColor" stroke="none" />
+              </svg>
+            </span>
+            <span class="lbl">Wi-Fi</span>
           </button>
           <button class="type-pill" data-type="vcard">
-            <span class="ico">☺</span><span class="lbl">Contact</span>
+            <span class="ico">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="8" cy="5.5" r="2.5" />
+                <path d="M3 14c.7-2.7 3-4 5-4s4.3 1.3 5 4" />
+              </svg>
+            </span>
+            <span class="lbl">Contact</span>
           </button>
           <button class="type-pill" data-type="email">
-            <span class="ico">@</span><span class="lbl">Email</span>
+            <span class="ico">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3.5" width="12" height="9" rx="1" />
+                <path d="M3 5l5 4 5-4" />
+              </svg>
+            </span>
+            <span class="lbl">Email</span>
           </button>
           <button class="type-pill" data-type="sms">
-            <span class="ico">✉</span><span class="lbl">SMS</span>
+            <span class="ico">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 3.5h10a1 1 0 0 1 1 1v5.5a1 1 0 0 1-1 1H7l-3 2.5V11h-1a1 1 0 0 1-1-1V4.5a1 1 0 0 1 1-1z" />
+                <path d="M5.5 7.5h.01M8 7.5h.01M10.5 7.5h.01" />
+              </svg>
+            </span>
+            <span class="lbl">SMS</span>
           </button>
           <button class="type-pill" data-type="phone">
-            <span class="ico">☏</span><span class="lbl">Phone</span>
+            <span class="ico">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 3.5l2-1.5 2.2 3.5L5.5 7a8 8 0 0 0 3.5 3.5L10.5 9l3.5 2.2-1.5 2A2 2 0 0 1 11 14 11 11 0 0 1 2 5a2 2 0 0 1 1-1.5z" />
+              </svg>
+            </span>
+            <span class="lbl">Phone</span>
           </button>
           <button class="type-pill" data-type="geo">
-            <span class="ico">⌖</span><span class="lbl">Location</span>
+            <span class="ico">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M8 14s5-4.3 5-8.5a5 5 0 0 0-10 0C3 9.7 8 14 8 14z" />
+                <circle cx="8" cy="5.5" r="1.8" />
+              </svg>
+            </span>
+            <span class="lbl">Location</span>
           </button>
           <button class="type-pill" data-type="event">
-            <span class="ico">▦</span><span class="lbl">Event</span>
+            <span class="ico">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2.5" y="3.5" width="11" height="10" rx="1" />
+                <path d="M2.5 6.5h11M5.5 2v3M10.5 2v3" />
+              </svg>
+            </span>
+            <span class="lbl">Event</span>
           </button>
           <button class="type-pill" data-type="crypto">
-            <span class="ico">◈</span><span class="lbl">Crypto</span>
+            <span class="ico">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M8 2l5 6-5 6-5-6z" />
+                <path d="M5.5 8h5" />
+              </svg>
+            </span>
+            <span class="lbl">Crypto</span>
           </button>
         </div>
 
@@ -1809,7 +1895,14 @@
                 </div>
                 <div>
                   <button type="button" class="btn ghost" id="btn-geo-here">
-                    <span class="icn">⌖</span>Use my current location
+                    <span class="icn">
+                      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="8" cy="8" r="5" />
+                        <circle cx="8" cy="8" r="1" fill="currentColor" stroke="none" />
+                        <path d="M8 1.5v2M8 12.5v2M1.5 8h2M12.5 8h2" />
+                      </svg>
+                    </span>
+                    Use my current location
                   </button>
                 </div>
               </div>
@@ -2398,10 +2491,14 @@
                       <div class="logo-thumb hidden" id="logo-thumb">
                         <img id="logo-thumb-img" alt="logo" />
                       </div>
-                      <label class="filebtn" for="opt-logo"
-                        ><span class="icn">+</span
-                        ><span id="logo-label">Upload image…</span></label
-                      >
+                      <label class="filebtn" for="opt-logo">
+                        <span class="icn">
+                          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M8 3.5v9M3.5 8h9" />
+                          </svg>
+                        </span>
+                        <span id="logo-label">Upload image…</span>
+                      </label>
                       <button
                         type="button"
                         class="btn ghost btn-tight hidden"
@@ -2518,24 +2615,59 @@
             </div>
             <div class="actions four">
               <button type="button" class="btn" id="btn-png">
-                <span class="icn">⬇</span>PNG
+                <span class="icn">
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M8 2.5v8M4.5 7L8 10.5 11.5 7M2.5 14h11" />
+                  </svg>
+                </span>
+                PNG
               </button>
               <button type="button" class="btn" id="btn-svg">
-                <span class="icn">⬇</span>SVG
+                <span class="icn">
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M8 2.5v8M4.5 7L8 10.5 11.5 7M2.5 14h11" />
+                  </svg>
+                </span>
+                SVG
               </button>
               <button type="button" class="btn" id="btn-copy-img">
-                <span class="icn">⎘</span>Copy
+                <span class="icn">
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="5.5" y="5.5" width="8" height="8.5" rx="1" />
+                    <path d="M3 10.5V3a1 1 0 0 1 1-1h6.5" />
+                  </svg>
+                </span>
+                Copy
               </button>
               <button type="button" class="btn" id="btn-print">
-                <span class="icn">⎙</span>Print
+                <span class="icn">
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4.5 5.5V2.5h7v3M3.5 5.5h9a1 1 0 0 1 1 1V11a1 1 0 0 1-1 1h-1" />
+                    <rect x="4.5" y="9" width="7" height="4.5" />
+                  </svg>
+                </span>
+                Print
               </button>
             </div>
             <div class="actions two">
               <button type="button" class="btn" id="btn-share">
-                <span class="icn">🔗</span>Share link
+                <span class="icn">
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="4" cy="8" r="1.7" />
+                    <circle cx="12" cy="4" r="1.7" />
+                    <circle cx="12" cy="12" r="1.7" />
+                    <path d="M5.5 7.2L10.5 4.8M5.5 8.8L10.5 11.2" />
+                  </svg>
+                </span>
+                Share link
               </button>
               <button type="button" class="btn primary" id="btn-save">
-                <span class="icn">★</span>Save
+                <span class="icn">
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M8 2.5l1.8 3.7 4 .6-2.9 2.9.7 4-3.6-1.9-3.6 1.9.7-4L2.2 6.8l4-.6z" />
+                  </svg>
+                </span>
+                Save
               </button>
             </div>
           </div>
@@ -2559,13 +2691,28 @@
             <div class="pane-head">Camera</div>
             <div class="actions three">
               <button class="btn primary" id="btn-cam-start">
-                <span class="icn">▶</span>Start camera
+                <span class="icn">
+                  <svg viewBox="0 0 16 16" fill="currentColor" stroke="none">
+                    <path d="M5 3v10l8-5z" />
+                  </svg>
+                </span>
+                Start camera
               </button>
               <button class="btn hidden" id="btn-cam-stop">
-                <span class="icn">■</span>Stop
+                <span class="icn">
+                  <svg viewBox="0 0 16 16" fill="currentColor" stroke="none">
+                    <rect x="4" y="4" width="8" height="8" />
+                  </svg>
+                </span>
+                Stop
               </button>
               <button class="btn hidden" id="btn-cam-flip">
-                <span class="icn">⇄</span>Flip
+                <span class="icn">
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 6h9.5l-2-2M13 10H3.5l2 2" />
+                  </svg>
+                </span>
+                Flip
               </button>
             </div>
             <div class="video-wrap empty" id="video-wrap">CAMERA OFF</div>
@@ -2645,7 +2792,12 @@
           <div></div>
           <div>
             <button class="btn primary" id="batch-go">
-              <span class="icn">⚡</span>Generate all
+              <span class="icn">
+                <svg viewBox="0 0 16 16" fill="currentColor" stroke="none">
+                  <path d="M9.5 2L3.5 9H7l-.5 5L13 7H9z" />
+                </svg>
+              </span>
+              Generate all
             </button>
           </div>
         </div>
@@ -2669,7 +2821,7 @@
         <div class="section-head">
           <h1>Saved</h1>
           <div class="crumb">
-            <b id="saved-count">0</b> &nbsp; · &nbsp; LOCAL STORAGE
+            <b id="saved-count">0 saved items</b> &nbsp; · &nbsp; LOCAL STORAGE
           </div>
         </div>
         <div class="saved-tools">
@@ -3868,15 +4020,12 @@
         ctx.save();
         ctx.translate(off, off);
 
-        // Modules (skip finder areas when using a non-square eye)
+        // Modules (finder areas always rendered separately by drawEye so
+        // the eye keeps its own style independent of the module style)
         ctx.fillStyle = fg;
-        const skipFinder = eye !== "square";
         for (let y = 0; y < qr.size; y++)
           for (let x = 0; x < qr.size; x++) {
-            if (
-              qr.modules[y][x] &&
-              !(skipFinder && isFinderArea(x, y, qr.size))
-            ) {
+            if (qr.modules[y][x] && !isFinderArea(x, y, qr.size)) {
               const px1 = (x + margin) * scale,
                 py1 = (y + margin) * scale;
               drawModule(ctx, px1, py1, scale, style, qr, x, y);
@@ -3884,11 +4033,9 @@
           }
 
         // Eyes
-        if (skipFinder) {
-          drawEye(ctx, margin, margin, scale, fg, bg, eye);
-          drawEye(ctx, margin + qr.size - 7, margin, scale, fg, bg, eye);
-          drawEye(ctx, margin, margin + qr.size - 7, scale, fg, bg, eye);
-        }
+        drawEye(ctx, margin, margin, scale, fg, bg, eye);
+        drawEye(ctx, margin + qr.size - 7, margin, scale, fg, bg, eye);
+        drawEye(ctx, margin, margin + qr.size - 7, scale, fg, bg, eye);
 
         // Logo
         if (logoImage) {
@@ -4122,6 +4269,23 @@
 ============================================================ */
       const $ = (sel) => document.querySelector(sel);
       const $$ = (sel) => Array.from(document.querySelectorAll(sel));
+
+      /* ---------- icon set (used for dynamically-built buttons) ---------- */
+      const ICON_ATTRS =
+        'viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"';
+      const ICONS = {
+        download: `<svg ${ICON_ATTRS}><path d="M8 2.5v8M4.5 7L8 10.5 11.5 7M2.5 14h11"/></svg>`,
+        copy: `<svg ${ICON_ATTRS}><rect x="5.5" y="5.5" width="8" height="8.5" rx="1"/><path d="M3 10.5V3a1 1 0 0 1 1-1h6.5"/></svg>`,
+        print: `<svg ${ICON_ATTRS}><path d="M4.5 5.5V2.5h7v3M3.5 5.5h9a1 1 0 0 1 1 1V11a1 1 0 0 1-1 1h-1"/><rect x="4.5" y="9" width="7" height="4.5"/></svg>`,
+        save: `<svg ${ICON_ATTRS}><path d="M8 2.5l1.8 3.7 4 .6-2.9 2.9.7 4-3.6-1.9-3.6 1.9.7-4L2.2 6.8l4-.6z"/></svg>`,
+        external: `<svg ${ICON_ATTRS}><path d="M9.5 2.5h4v4M13.5 2.5L8 8M11 9v3.5a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h3"/></svg>`,
+        phone: `<svg ${ICON_ATTRS}><path d="M3 3.5l2-1.5 2.2 3.5L5.5 7a8 8 0 0 0 3.5 3.5L10.5 9l3.5 2.2-1.5 2A2 2 0 0 1 11 14 11 11 0 0 1 2 5a2 2 0 0 1 1-1.5z"/></svg>`,
+        location: `<svg ${ICON_ATTRS}><path d="M8 14s5-4.3 5-8.5a5 5 0 0 0-10 0C3 9.7 8 14 8 14z"/><circle cx="8" cy="5.5" r="1.8"/></svg>`,
+        trash: `<svg ${ICON_ATTRS}><path d="M3 4.5h10M6 4.5V3a.5.5 0 0 1 .5-.5h3A.5.5 0 0 1 10 3v1.5M4.5 4.5l.7 8.5a1 1 0 0 0 1 .9h3.6a1 1 0 0 0 1-.9l.7-8.5"/></svg>`,
+      };
+      function svgIcon(name) {
+        return ICONS[name] || "";
+      }
 
       const STATE_KEY = "qrtool-state";
       const SAVED_KEY = "qrtool-saved";
@@ -5130,7 +5294,7 @@
         for (const act of parsed.actions) {
           const b = document.createElement("button");
           b.className = "btn " + (act.primary ? "primary" : "");
-          b.innerHTML = `<span class="icn">${act.icon || ""}</span>${act.label}`;
+          b.innerHTML = `<span class="icn">${svgIcon(act.icon) || ""}</span>${act.label}`;
           b.addEventListener("click", () => act.run(value, parsed));
           actions.appendChild(b);
         }
@@ -5141,13 +5305,13 @@
         const lower = v.toLowerCase();
         const copyAction = {
           label: "Copy raw",
-          icon: "⎘",
+          icon: "copy",
           run: () =>
             navigator.clipboard.writeText(v).then(() => toast("Copied", "ok")),
         };
         const saveAction = {
           label: "Save",
-          icon: "★",
+          icon: "save",
           run: () => {
             const list = loadSaved();
             list.unshift({
@@ -5174,7 +5338,7 @@
             actions: [
               {
                 label: "Open",
-                icon: "↗",
+                icon: "external",
                 primary: true,
                 run: () => window.open(v, "_blank", "noopener"),
               },
@@ -5198,7 +5362,7 @@
             actions: [
               {
                 label: "Copy password",
-                icon: "⎘",
+                icon: "copy",
                 primary: true,
                 run: () => {
                   if (fields["Password"])
@@ -5232,7 +5396,7 @@
             actions: [
               {
                 label: "Download .vcf",
-                icon: "⬇",
+                icon: "download",
                 primary: true,
                 run: () =>
                   downloadBlob(
@@ -5258,7 +5422,7 @@
             actions: [
               {
                 label: "Open in mail",
-                icon: "↗",
+                icon: "external",
                 primary: true,
                 run: () => (window.location.href = v),
               },
@@ -5277,7 +5441,7 @@
             actions: [
               {
                 label: "Open SMS",
-                icon: "↗",
+                icon: "external",
                 primary: true,
                 run: () =>
                   (window.location.href = `sms:${num}?body=${encodeURIComponent(rest.join(":"))}`),
@@ -5295,7 +5459,7 @@
             actions: [
               {
                 label: "Call",
-                icon: "☏",
+                icon: "phone",
                 primary: true,
                 run: () => (window.location.href = v),
               },
@@ -5313,7 +5477,7 @@
             actions: [
               {
                 label: "Open in maps",
-                icon: "⌖",
+                icon: "location",
                 primary: true,
                 run: () =>
                   window.open(
@@ -5348,7 +5512,7 @@
             actions: [
               {
                 label: "Download .ics",
-                icon: "⬇",
+                icon: "download",
                 primary: true,
                 run: () => {
                   const ics = `BEGIN:VCALENDAR\nVERSION:2.0\n${v}\nEND:VCALENDAR`;
@@ -5489,12 +5653,12 @@
         actions.innerHTML = "";
         const dlAll = document.createElement("button");
         dlAll.className = "btn primary";
-        dlAll.innerHTML = `<span class="icn">⬇</span>Download all (${state.batchTiles.length})`;
+        dlAll.innerHTML = `<span class="icn">${svgIcon("download")}</span>Download all (${state.batchTiles.length})`;
         dlAll.addEventListener("click", downloadAllBatch);
         actions.appendChild(dlAll);
         const sheet = document.createElement("button");
         sheet.className = "btn";
-        sheet.innerHTML = `<span class="icn">⎙</span>Print sheet`;
+        sheet.innerHTML = `<span class="icn">${svgIcon("print")}</span>Print sheet`;
         sheet.addEventListener("click", printSheet);
         actions.appendChild(sheet);
         toast(`Generated ${state.batchTiles.length}`, "ok");
@@ -5892,13 +6056,16 @@
           return [];
         }
       }
+      function fmtSavedCount(n) {
+        return `${n} saved item${n === 1 ? "" : "s"}`;
+      }
       function saveSavedList(list) {
         localStorage.setItem(SAVED_KEY, JSON.stringify(list));
-        $("#saved-count").textContent = list.length;
+        $("#saved-count").textContent = fmtSavedCount(list.length);
       }
       function renderSaved() {
         const list = loadSaved();
-        $("#saved-count").textContent = list.length;
+        $("#saved-count").textContent = fmtSavedCount(list.length);
         const root = $("#saved-list");
         if (!list.length) {
           root.innerHTML = `<div class="empty-state">Nothing saved yet — press ★ Save while composing</div>`;
@@ -5965,12 +6132,7 @@
           sub2.textContent = `${(item.type || "qr").toUpperCase()} · ${dateStr}${extra}`;
           meta.appendChild(title);
           meta.appendChild(sub2);
-          const acts = document.createElement("div");
-          acts.className = "acts";
-          const reuse = document.createElement("button");
-          reuse.className = "btn btn-tight";
-          reuse.textContent = "Reuse";
-          reuse.addEventListener("click", () => {
+          const reuseItem = () => {
             $$("#nav .nav-btn").forEach((b) =>
               b.classList.toggle("active", b.dataset.tab === "generate"),
             );
@@ -6002,7 +6164,17 @@
             updateCrumb();
             updateMetaLabels();
             scheduleRegen();
+          };
+          row.addEventListener("click", (e) => {
+            if (e.target.closest(".acts")) return;
+            reuseItem();
           });
+          const acts = document.createElement("div");
+          acts.className = "acts";
+          const reuse = document.createElement("button");
+          reuse.className = "btn btn-tight";
+          reuse.textContent = "Reuse";
+          reuse.addEventListener("click", reuseItem);
           const copy = document.createElement("button");
           copy.className = "btn btn-tight";
           copy.textContent = "Copy";
@@ -6052,8 +6224,9 @@
             }
           });
           const del = document.createElement("button");
-          del.className = "btn btn-tight";
-          del.textContent = "✕";
+          del.className = "btn btn-tight icon-only";
+          del.innerHTML = svgIcon("trash");
+          del.title = "Delete";
           del.addEventListener("click", () => {
             const all = loadSaved().filter((x) => x.id !== item.id);
             saveSavedList(all);
@@ -6222,7 +6395,7 @@
       paintSwatches();
       applyStateToDom();
       bindLiveInputs();
-      $("#saved-count").textContent = loadSaved().length;
+      $("#saved-count").textContent = fmtSavedCount(loadSaved().length);
       regen();
       persistState();
       if (fromHash) toast("Loaded from shared link", "ok");
