@@ -7,7 +7,7 @@
     <link
       rel="icon"
       type="image/svg+xml"
-      href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23120608'/><g fill='%23d4a35c'><rect x='5' y='5' width='8' height='8'/><rect x='7' y='7' width='4' height='4' fill='%23120608'/><rect x='8' y='8' width='2' height='2' fill='%23d4a35c'/><rect x='19' y='5' width='8' height='8'/><rect x='21' y='7' width='4' height='4' fill='%23120608'/><rect x='22' y='8' width='2' height='2' fill='%23d4a35c'/><rect x='5' y='19' width='8' height='8'/><rect x='7' y='21' width='4' height='4' fill='%23120608'/><rect x='8' y='22' width='2' height='2' fill='%23d4a35c'/><rect x='17' y='17' width='2' height='2'/><rect x='20' y='20' width='2' height='2'/><rect x='23' y='23' width='2' height='2'/></g></svg>"
+      href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23120608'/><g fill='%23ff2a3c'><rect x='5' y='5' width='8' height='8'/><rect x='7' y='7' width='4' height='4' fill='%23120608'/><rect x='8' y='8' width='2' height='2' fill='%23ff2a3c'/><rect x='19' y='5' width='8' height='8'/><rect x='21' y='7' width='4' height='4' fill='%23120608'/><rect x='22' y='8' width='2' height='2' fill='%23ff2a3c'/><rect x='5' y='19' width='8' height='8'/><rect x='7' y='21' width='4' height='4' fill='%23120608'/><rect x='8' y='22' width='2' height='2' fill='%23ff2a3c'/><rect x='17' y='17' width='2' height='2'/><rect x='20' y='20' width='2' height='2'/><rect x='23' y='23' width='2' height='2'/></g></svg>"
     />
     <style>
       :root {
@@ -23,10 +23,10 @@
         --text-2: #9a9aa3;
         --text-3: #5a5a64;
         --text-4: #3a3a44;
-        --accent: #d4a35c;
-        --accent-2: #f0c280;
-        --accent-soft: rgba(212, 163, 92, 0.12);
-        --accent-line: rgba(212, 163, 92, 0.35);
+        --accent: #d22231;
+        --accent-2: #ff5a68;
+        --accent-soft: rgba(255, 42, 60, 0.12);
+        --accent-line: rgba(255, 42, 60, 0.4);
         --danger: #d96666;
         --ok: #84d49c;
         --logo-a: #3a0e1a;
@@ -203,7 +203,6 @@
         gap: 7px;
         color: var(--text-4);
         text-decoration: none;
-        margin-top: 8px;
         font-family: var(--mono);
         font-size: 10px;
         letter-spacing: 0.14em;
@@ -296,7 +295,7 @@
       /* ============ TYPE PILLS ============ */
       .types {
         display: grid;
-        grid-template-columns: repeat(8, 1fr);
+        grid-template-columns: repeat(10, 1fr);
         gap: 4px;
         margin-bottom: 32px;
         padding: 4px;
@@ -307,7 +306,7 @@
       .type-pill {
         background: transparent;
         border: 0;
-        padding: 10px 8px;
+        padding: 10px 4px;
         border-radius: var(--radius);
         cursor: pointer;
         color: var(--text-3);
@@ -316,15 +315,16 @@
         transition: all 0.12s ease;
       }
       .type-pill .ico {
-        font-size: 14px;
+        font-size: 15px;
         display: block;
         margin-bottom: 4px;
         opacity: 0.7;
+        line-height: 1;
       }
       .type-pill .lbl {
-        font-size: 10.5px;
+        font-size: 10px;
         font-weight: 500;
-        letter-spacing: 0.08em;
+        letter-spacing: 0.06em;
         text-transform: uppercase;
       }
       .type-pill:hover {
@@ -645,7 +645,7 @@
         border: 0;
         margin-top: -7px;
         cursor: pointer;
-        box-shadow: 0 0 0 4px rgba(212, 163, 92, 0.15);
+        box-shadow: 0 0 0 4px rgba(255, 42, 60, 0.18);
       }
       .ctrl-range::-moz-range-track {
         height: 4px;
@@ -660,7 +660,7 @@
         background: var(--accent);
         border: 0;
         cursor: pointer;
-        box-shadow: 0 0 0 4px rgba(212, 163, 92, 0.15);
+        box-shadow: 0 0 0 4px rgba(255, 42, 60, 0.18);
       }
 
       .type-form {
@@ -759,18 +759,27 @@
         padding: 12px;
         display: grid;
         place-items: center;
+        margin: 0 auto;
+      }
+      .preview-canvas-host.is-transparent {
+        background-color: #2a2a2e;
+        background-image:
+          linear-gradient(45deg, #555 25%, transparent 25%),
+          linear-gradient(-45deg, #555 25%, transparent 25%),
+          linear-gradient(45deg, transparent 75%, #555 75%),
+          linear-gradient(-45deg, transparent 75%, #555 75%);
+        background-size: 14px 14px;
+        background-position:
+          0 0,
+          0 7px,
+          7px -7px,
+          -7px 0;
       }
       .preview-canvas-host canvas {
         display: block;
         image-rendering: pixelated;
         image-rendering: -moz-crisp-edges;
-      }
-      .preview-canvas-host canvas.qr-canvas {
-        width: 256px;
-        height: 256px;
-      }
-      .preview-canvas-host canvas.bc-canvas {
-        width: 320px;
+        max-width: 100%;
         height: auto;
       }
       .preview-canvas-host.empty {
@@ -894,7 +903,9 @@
         gap: 14px;
       }
       /* Parent uses `gap`, so pane-head shouldn't add its own bottom margin on top of that. */
-      .scan-stage > .pane-head { margin-bottom: 0; }
+      .scan-stage > .pane-head {
+        margin-bottom: 0;
+      }
       .video-wrap {
         background: #000;
         border-radius: var(--radius);
@@ -1439,6 +1450,11 @@
       }
 
       /* Responsive */
+      @media (max-width: 1280px) {
+        .types {
+          grid-template-columns: repeat(5, 1fr);
+        }
+      }
       @media (max-width: 1024px) {
         body {
           flex-direction: column;
@@ -1536,10 +1552,6 @@
         </button>
       </div>
       <div class="rail-foot">
-        <div class="row">
-          <span>STATUS</span><span id="status-pill">READY</span>
-        </div>
-        <div class="row"><span>LOCAL</span><span>ONLY</span></div>
         <a
           class="rail-link"
           href="https://github.com/tcboni/qr-tool"
@@ -1579,13 +1591,16 @@
 
         <div class="types qr-only" id="types">
           <button class="type-pill active" data-type="text">
-            <span class="ico">⌨</span><span class="lbl">Text</span>
+            <span class="ico">¶</span><span class="lbl">Text</span>
+          </button>
+          <button class="type-pill" data-type="url">
+            <span class="ico">⇗</span><span class="lbl">URL</span>
           </button>
           <button class="type-pill" data-type="wifi">
-            <span class="ico">⌬</span><span class="lbl">Wi-Fi</span>
+            <span class="ico">≋</span><span class="lbl">Wi-Fi</span>
           </button>
           <button class="type-pill" data-type="vcard">
-            <span class="ico">◉</span><span class="lbl">Contact</span>
+            <span class="ico">☺</span><span class="lbl">Contact</span>
           </button>
           <button class="type-pill" data-type="email">
             <span class="ico">@</span><span class="lbl">Email</span>
@@ -1602,6 +1617,9 @@
           <button class="type-pill" data-type="event">
             <span class="ico">▦</span><span class="lbl">Event</span>
           </button>
+          <button class="type-pill" data-type="crypto">
+            <span class="ico">◈</span><span class="lbl">Crypto</span>
+          </button>
         </div>
 
         <div class="bench">
@@ -1612,13 +1630,24 @@
             <div class="qr-only">
               <div id="form-text" class="type-form active">
                 <div class="field">
-                  <label class="lbl" for="i-text">Text or URL</label>
+                  <label class="lbl" for="i-text">Plain text</label>
                   <textarea
                     class="ctrl"
                     id="i-text"
-                    rows="4"
-                    placeholder="https://example.com or any text…"
+                    rows="10"
+                    placeholder="Type any text, notes, a menu, a message…"
                   ></textarea>
+                </div>
+              </div>
+              <div id="form-url" class="type-form">
+                <div class="field">
+                  <label class="lbl" for="i-url">Website URL</label>
+                  <input
+                    class="ctrl"
+                    type="url"
+                    id="i-url"
+                    placeholder="https://example.com"
+                  />
                 </div>
               </div>
               <div id="form-wifi" class="type-form">
@@ -1784,6 +1813,51 @@
                   </button>
                 </div>
               </div>
+              <div id="form-crypto" class="type-form">
+                <div class="field-row-2">
+                  <div class="field">
+                    <label class="lbl" for="i-cr-coin">Coin</label>
+                    <select class="ctrl" id="i-cr-coin">
+                      <option value="bitcoin">Bitcoin (BTC)</option>
+                      <option value="ethereum">Ethereum (ETH)</option>
+                      <option value="litecoin">Litecoin (LTC)</option>
+                      <option value="dogecoin">Dogecoin (DOGE)</option>
+                      <option value="bitcoincash">Bitcoin Cash (BCH)</option>
+                      <option value="monero">Monero (XMR)</option>
+                      <option value="solana">Solana (SOL)</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label class="lbl" for="i-cr-amount"
+                      >Amount (optional)</label
+                    >
+                    <input
+                      class="ctrl"
+                      type="text"
+                      id="i-cr-amount"
+                      placeholder="0.0025"
+                    />
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="lbl" for="i-cr-addr">Wallet address</label>
+                  <input
+                    class="ctrl"
+                    type="text"
+                    id="i-cr-addr"
+                    placeholder="bc1q… / 0x… / etc."
+                  />
+                </div>
+                <div class="field">
+                  <label class="lbl" for="i-cr-label">Label (optional)</label>
+                  <input
+                    class="ctrl"
+                    type="text"
+                    id="i-cr-label"
+                    placeholder="Tip jar"
+                  />
+                </div>
+              </div>
               <div id="form-event" class="type-form">
                 <div class="field">
                   <label class="lbl" for="i-ev-title">Title</label
@@ -1855,7 +1929,7 @@
                           type="color"
                           id="opt-fg"
                           class="color-square"
-                          value="#0a0a0c"
+                          value="#000000"
                           title="Pick color"
                         />
                       </span>
@@ -1863,20 +1937,20 @@
                         type="text"
                         id="opt-fg-hex"
                         class="ctrl ctrl-hex"
-                        value="#0a0a0c"
+                        value="#000000"
                         maxlength="11"
                       />
                     </div>
                     <div class="swatch-row" data-target="opt-fg">
                       <button
                         class="swatch"
-                        data-c="#0a0a0c"
+                        data-c="#000000"
                         title="Black"
                       ></button>
                       <button
                         class="swatch"
-                        data-c="#d4a35c"
-                        title="Amber"
+                        data-c="#ff2a3c"
+                        title="Laser red"
                       ></button>
                       <button
                         class="swatch"
@@ -2097,11 +2171,16 @@
                             viewBox="0 0 14 14"
                             fill="currentColor"
                           >
-                            <path
-                              d="M0 0h14v14H0z M2 2v10h10V2z"
-                              fill-rule="evenodd"
+                            <rect
+                              x="0.5"
+                              y="0.5"
+                              width="13"
+                              height="13"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2"
                             />
-                            <rect x="5" y="5" width="4" height="4" />
+                            <rect x="4" y="4" width="6" height="6" />
                           </svg>
                           <span class="seg-sub">SQUARE</span>
                         </button>
@@ -2112,11 +2191,17 @@
                             viewBox="0 0 14 14"
                             fill="currentColor"
                           >
-                            <path
-                              d="M3 0h8a3 3 0 013 3v8a3 3 0 01-3 3H3a3 3 0 01-3-3V3a3 3 0 013-3zm0 2a1 1 0 00-1 1v8a1 1 0 001 1h8a1 1 0 001-1V3a1 1 0 00-1-1H3z"
-                              fill-rule="evenodd"
+                            <rect
+                              x="0.5"
+                              y="0.5"
+                              width="13"
+                              height="13"
+                              rx="3"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2"
                             />
-                            <rect x="5" y="5" width="4" height="4" rx="1" />
+                            <rect x="4" y="4" width="6" height="6" rx="1.5" />
                           </svg>
                           <span class="seg-sub">ROUNDED</span>
                         </button>
@@ -2127,11 +2212,15 @@
                             viewBox="0 0 14 14"
                             fill="currentColor"
                           >
-                            <path
-                              d="M7 0a7 7 0 110 14A7 7 0 017 0zm0 2a5 5 0 100 10A5 5 0 007 2z"
-                              fill-rule="evenodd"
+                            <circle
+                              cx="7"
+                              cy="7"
+                              r="6"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2"
                             />
-                            <circle cx="7" cy="7" r="2" />
+                            <circle cx="7" cy="7" r="3" />
                           </svg>
                           <span class="seg-sub">CIRCLE</span>
                         </button>
@@ -2143,11 +2232,13 @@
                             fill="currentColor"
                           >
                             <path
-                              d="M4 0h10v10a4 4 0 01-4 4H0V4a4 4 0 014-4zm0 2a2 2 0 00-2 2v8h6a2 2 0 002-2V2H4z"
-                              fill-rule="evenodd"
+                              d="M4 1h9v9a3 3 0 0 1-3 3H1V4a3 3 0 0 1 3-3z"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2"
                             />
                             <path
-                              d="M6 5h2a1 1 0 011 1v2a1 1 0 01-1 1H5V6a1 1 0 011-1z"
+                              d="M5.5 4h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 4 8.5v-3A1.5 1.5 0 0 1 5.5 4z"
                             />
                           </svg>
                           <span class="seg-sub">LEAF</span>
@@ -2162,18 +2253,100 @@
                           class="seg-btn active"
                           data-v="none"
                         >
+                          <svg
+                            width="22"
+                            height="22"
+                            viewBox="0 0 22 22"
+                            fill="none"
+                            stroke="currentColor"
+                          >
+                            <line
+                              x1="3"
+                              y1="19"
+                              x2="19"
+                              y2="3"
+                              stroke-width="1"
+                              stroke-dasharray="2 2"
+                            />
+                          </svg>
                           <span class="seg-sub">NONE</span>
                         </button>
                         <button type="button" class="seg-btn" data-v="thin">
+                          <svg
+                            width="22"
+                            height="22"
+                            viewBox="0 0 22 22"
+                            fill="none"
+                            stroke="currentColor"
+                          >
+                            <rect
+                              x="3"
+                              y="3"
+                              width="16"
+                              height="16"
+                              stroke-width="1"
+                            />
+                          </svg>
                           <span class="seg-sub">THIN</span>
                         </button>
                         <button type="button" class="seg-btn" data-v="thick">
+                          <svg
+                            width="22"
+                            height="22"
+                            viewBox="0 0 22 22"
+                            fill="none"
+                            stroke="currentColor"
+                          >
+                            <rect
+                              x="3.5"
+                              y="3.5"
+                              width="15"
+                              height="15"
+                              stroke-width="3"
+                            />
+                          </svg>
                           <span class="seg-sub">THICK</span>
                         </button>
                         <button type="button" class="seg-btn" data-v="double">
+                          <svg
+                            width="22"
+                            height="22"
+                            viewBox="0 0 22 22"
+                            fill="none"
+                            stroke="currentColor"
+                          >
+                            <rect
+                              x="2"
+                              y="2"
+                              width="18"
+                              height="18"
+                              stroke-width="1"
+                            />
+                            <rect
+                              x="5"
+                              y="5"
+                              width="12"
+                              height="12"
+                              stroke-width="1"
+                            />
+                          </svg>
                           <span class="seg-sub">DOUBLE</span>
                         </button>
                         <button type="button" class="seg-btn" data-v="corners">
+                          <svg
+                            width="22"
+                            height="22"
+                            viewBox="0 0 22 22"
+                            fill="none"
+                            stroke="currentColor"
+                          >
+                            <path
+                              d="M3 8 V3 H8 M14 3 H19 V8 M19 14 V19 H14 M8 19 H3 V14"
+                              stroke-width="1.5"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            />
+                          </svg>
                           <span class="seg-sub">CORNERS</span>
                         </button>
                       </div>
@@ -3950,15 +4123,15 @@
       const $ = (sel) => document.querySelector(sel);
       const $$ = (sel) => Array.from(document.querySelectorAll(sel));
 
-      const STATE_KEY = "qrtool.state.v3";
-      const SAVED_KEY = "qrtool.saved.v2";
+      const STATE_KEY = "qrtool-state";
+      const SAVED_KEY = "qrtool-saved";
 
       const state = {
         format: "qr", // "qr" | "barcode"
         type: "text",
         fields: {},
         opts: {
-          fg: "#0a0a0c",
+          fg: "#000000",
           bg: "#ffffff",
           bgTransparent: false,
           margin: 4,
@@ -3988,7 +4161,8 @@
       };
 
       const TYPE_LABELS = {
-        text: "TEXT / URL",
+        text: "TEXT",
+        url: "URL",
         wifi: "WI-FI",
         vcard: "CONTACT",
         email: "EMAIL",
@@ -3996,6 +4170,7 @@
         phone: "PHONE",
         geo: "LOCATION",
         event: "EVENT",
+        crypto: "CRYPTO",
       };
 
       /* ---------- persistence ---------- */
@@ -4410,6 +4585,21 @@
       function buildQrPayload() {
         const t = state.type;
         if (t === "text") return ($("#i-text").value || "").trim();
+        if (t === "url") return ($("#i-url").value || "").trim();
+        if (t === "crypto") {
+          const addr = ($("#i-cr-addr").value || "").trim();
+          if (!addr) return "";
+          const coin = $("#i-cr-coin").value;
+          const amount = ($("#i-cr-amount").value || "").trim();
+          const label = ($("#i-cr-label").value || "").trim();
+          const params = [];
+          if (amount) {
+            const key = coin === "ethereum" ? "value" : "amount";
+            params.push(`${key}=${encodeURIComponent(amount)}`);
+          }
+          if (label) params.push("label=" + encodeURIComponent(label));
+          return `${coin}:${addr}${params.length ? "?" + params.join("&") : ""}`;
+        }
         if (t === "wifi") {
           const ssid = esc($("#i-wifi-ssid").value);
           const enc = $("#i-wifi-enc").value;
@@ -4525,6 +4715,8 @@
 
       function regen() {
         const host = $("#preview-host");
+        const opts = collectQrOpts();
+        host.classList.toggle("is-transparent", !!opts.bgTransparent);
         if (state.format === "barcode") {
           regenBarcode(host);
         } else {
@@ -4701,6 +4893,15 @@
         if (!text) return toast("Nothing to save", "err");
         const bcFmt = $("#bc-format").value;
         const list = loadSaved();
+        const itemType = state.format === "barcode" ? bcFmt : state.type;
+        if (
+          list[0] &&
+          list[0].payload === text &&
+          list[0].format === state.format &&
+          list[0].type === itemType
+        ) {
+          return toast("Already saved", "ok");
+        }
         list.unshift({
           id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
           payload: text,
@@ -4761,6 +4962,16 @@
           return "SMS · " + (payload.match(/^smsto:([^:]+)/i)?.[1] || "");
         if (type === "phone") return "Tel · " + payload.replace(/^tel:/, "");
         if (type === "geo") return "Geo · " + payload.replace(/^geo:/, "");
+        if (type === "url") return "URL · " + payload;
+        if (type === "crypto") {
+          const m = payload.match(/^([a-z]+):([^?]+)/i);
+          if (m) {
+            const short =
+              m[2].length > 14 ? m[2].slice(0, 8) + "…" + m[2].slice(-4) : m[2];
+            return m[1].toUpperCase() + " · " + short;
+          }
+          return "Crypto · " + payload;
+        }
         return payload.length > 60 ? payload.slice(0, 60) + "…" : payload;
       }
 
@@ -5321,13 +5532,49 @@
 ============================================================ */
       const LIBRARY = [
         {
-          ico: "🌐",
+          ico: "⇗",
           title: "Website URL",
           desc: "Plain web link",
+          tag: "QR · URL",
+          fmt: "qr",
+          type: "url",
+          fields: { "i-url": "https://example.com" },
+        },
+        {
+          ico: "¶",
+          title: "Restaurant menu",
+          desc: "Plain text listing",
           tag: "QR · TEXT",
           fmt: "qr",
           type: "text",
-          fields: { "i-text": "https://example.com" },
+          fields: {
+            "i-text":
+              "CAFÉ ESPRESSO\n— Menu —\n\nDrinks\n  Espresso ............ $3\n  Cappuccino .......... $4.5\n  Latte ............... $5\n  Cold brew ........... $5\n\nPastries\n  Croissant ........... $3.5\n  Almond danish ....... $4\n  Lemon tart .......... $5\n\nOpen daily 7am – 6pm",
+          },
+        },
+        {
+          ico: "¶",
+          title: "Quick note",
+          desc: "Multiline message",
+          tag: "QR · TEXT",
+          fmt: "qr",
+          type: "text",
+          fields: {
+            "i-text":
+              "Hey! I left the keys under the mat.\nFridge is stocked, wifi password is on the router.\n\n— J",
+          },
+        },
+        {
+          ico: "¶",
+          title: "Wi-Fi guest card",
+          desc: "Printable text card",
+          tag: "QR · TEXT",
+          fmt: "qr",
+          type: "text",
+          fields: {
+            "i-text":
+              "GUEST WIFI\n\nNetwork:  Café-Guest\nPassword: latte2024\n\nEnjoy your stay!",
+          },
         },
         {
           ico: "📶",
@@ -5427,8 +5674,8 @@
           desc: "Repo or user page",
           tag: "QR · URL",
           fmt: "qr",
-          type: "text",
-          fields: { "i-text": "https://github.com/tcboni/qr-tool" },
+          type: "url",
+          fields: { "i-url": "https://github.com/tcboni/qr-tool" },
         },
         {
           ico: "in",
@@ -5436,8 +5683,8 @@
           desc: "Professional link",
           tag: "QR · URL",
           fmt: "qr",
-          type: "text",
-          fields: { "i-text": "https://www.linkedin.com/in/williamhgates" },
+          type: "url",
+          fields: { "i-url": "https://www.linkedin.com/in/williamhgates" },
         },
         {
           ico: "▶",
@@ -5445,8 +5692,8 @@
           desc: "Watch URL",
           tag: "QR · URL",
           fmt: "qr",
-          type: "text",
-          fields: { "i-text": "https://www.youtube.com/watch?v=dQw4w9WgXcQ" },
+          type: "url",
+          fields: { "i-url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ" },
         },
         {
           ico: "♫",
@@ -5454,9 +5701,33 @@
           desc: "Song or playlist",
           tag: "QR · URL",
           fmt: "qr",
-          type: "text",
+          type: "url",
           fields: {
-            "i-text": "https://open.spotify.com/track/4cOdK2wGLETKBW3PvgPWqT",
+            "i-url": "https://open.spotify.com/track/4cOdK2wGLETKBW3PvgPWqT",
+          },
+        },
+        {
+          ico: "▭",
+          title: "App Store review",
+          desc: "Direct review page",
+          tag: "QR · URL",
+          fmt: "qr",
+          type: "url",
+          fields: {
+            "i-url":
+              "https://apps.apple.com/app/id1599151747?action=write-review",
+          },
+        },
+        {
+          ico: "✦",
+          title: "Google review",
+          desc: "Place review prompt",
+          tag: "QR · URL",
+          fmt: "qr",
+          type: "url",
+          fields: {
+            "i-url":
+              "https://search.google.com/local/writereview?placeid=YOUR_PLACE_ID",
           },
         },
         {
@@ -5465,10 +5736,12 @@
           desc: "BIP-21 URI",
           tag: "QR · CRYPTO",
           fmt: "qr",
-          type: "text",
+          type: "crypto",
           fields: {
-            "i-text":
-              "bitcoin:bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq?amount=0.0025&label=Coffee%20tip",
+            "i-cr-coin": "bitcoin",
+            "i-cr-addr": "bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq",
+            "i-cr-amount": "0.0025",
+            "i-cr-label": "Coffee tip",
           },
         },
         {
@@ -5477,10 +5750,26 @@
           desc: "EIP-681 payment",
           tag: "QR · CRYPTO",
           fmt: "qr",
-          type: "text",
+          type: "crypto",
           fields: {
-            "i-text":
-              "ethereum:0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045?value=1e16",
+            "i-cr-coin": "ethereum",
+            "i-cr-addr": "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045",
+            "i-cr-amount": "0.01",
+            "i-cr-label": "",
+          },
+        },
+        {
+          ico: "Ł",
+          title: "Litecoin payment",
+          desc: "LTC URI",
+          tag: "QR · CRYPTO",
+          fmt: "qr",
+          type: "crypto",
+          fields: {
+            "i-cr-coin": "litecoin",
+            "i-cr-addr": "ltc1qhf2hzdcdguptht27e6jx8klhe69yyu80hf5xy0",
+            "i-cr-amount": "",
+            "i-cr-label": "Donation",
           },
         },
         {
@@ -5489,17 +5778,17 @@
           desc: "Tip jar",
           tag: "QR · URL",
           fmt: "qr",
-          type: "text",
-          fields: { "i-text": "https://buymeacoffee.com/anthropic" },
+          type: "url",
+          fields: { "i-url": "https://buymeacoffee.com/anthropic" },
         },
         {
-          ico: "📱",
+          ico: "▮",
           title: "iOS App Store",
           desc: "App deep link",
           tag: "QR · URL",
           fmt: "qr",
-          type: "text",
-          fields: { "i-text": "https://apps.apple.com/app/id1599151747" },
+          type: "url",
+          fields: { "i-url": "https://apps.apple.com/app/id1599151747" },
         },
         {
           ico: "▶",
@@ -5507,9 +5796,9 @@
           desc: "Android app",
           tag: "QR · URL",
           fmt: "qr",
-          type: "text",
+          type: "url",
           fields: {
-            "i-text":
+            "i-url":
               "https://play.google.com/store/apps/details?id=com.spotify.music",
           },
         },
@@ -5915,6 +6204,9 @@
           if (data.fl) state.fields = data.fl;
           if (data.o) Object.assign(state.opts, data.o);
           if (data.b) Object.assign(state.bcOpts, data.b);
+          try {
+            history.replaceState(null, "", location.pathname + location.search);
+          } catch {}
           return true;
         } catch (e) {
           console.warn("Hash decode failed", e);
@@ -5930,9 +6222,6 @@
       paintSwatches();
       applyStateToDom();
       bindLiveInputs();
-      if (!fromHash && !Object.values(state.fields).some((v) => v)) {
-        $("#i-text").value = "https://example.com";
-      }
       $("#saved-count").textContent = loadSaved().length;
       regen();
       persistState();
