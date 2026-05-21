@@ -4069,23 +4069,31 @@
       }
 
       function drawFrame(ctx, w, h, opts) {
-        const { fg = "#000", frame = "none" } = opts;
+        const { fg = "#000", frame = "none", padPx = 0 } = opts;
         ctx.save();
         ctx.strokeStyle = fg;
         ctx.lineCap = "butt";
+        // Center each frame style inside the `padPx` margin so the gap to the
+        // canvas edge matches the gap to the QR. Falls back to a tight inset
+        // when padPx is 0 (frame drawn directly on a canvas with no margin).
         if (frame === "thin") {
           ctx.lineWidth = Math.max(2, Math.round(w * 0.005));
-          const inset = ctx.lineWidth / 2 + 2;
+          const inset = padPx > 0 ? padPx / 2 : ctx.lineWidth / 2 + 2;
           ctx.strokeRect(inset, inset, w - inset * 2, h - inset * 2);
         } else if (frame === "thick") {
           ctx.lineWidth = Math.max(6, Math.round(w * 0.022));
-          const inset = ctx.lineWidth / 2 + 2;
+          const inset = padPx > 0 ? padPx / 2 : ctx.lineWidth / 2 + 2;
           ctx.strokeRect(inset, inset, w - inset * 2, h - inset * 2);
         } else if (frame === "double") {
           ctx.lineWidth = Math.max(1, Math.round(w * 0.004));
-          const outerInset = ctx.lineWidth / 2 + 2;
-          const innerInset =
-            outerInset + ctx.lineWidth + Math.max(4, Math.round(w * 0.012));
+          const gap = Math.max(4, Math.round(w * 0.012));
+          // Center the (outer-stroke / gap / inner-stroke) ornament in padPx
+          const ornament = ctx.lineWidth + gap + ctx.lineWidth;
+          const outerInset =
+            padPx > 0
+              ? (padPx - ornament) / 2 + ctx.lineWidth / 2
+              : ctx.lineWidth / 2 + 2;
+          const innerInset = outerInset + ctx.lineWidth + gap;
           ctx.strokeRect(
             outerInset,
             outerInset,
@@ -4100,7 +4108,7 @@
           );
         } else if (frame === "corners") {
           ctx.lineWidth = Math.max(3, Math.round(w * 0.01));
-          const inset = ctx.lineWidth / 2 + 4;
+          const inset = padPx > 0 ? padPx / 2 : ctx.lineWidth / 2 + 4;
           const len = Math.min(w, h) * 0.1;
           ctx.beginPath();
           ctx.moveTo(inset, inset + len);
@@ -4213,7 +4221,7 @@
         if (frame !== "none") {
           ctx.save();
           ctx.translate(centerPad, centerPad);
-          drawFrame(ctx, innerPx, innerPx, { fg, frame });
+          drawFrame(ctx, innerPx, innerPx, { fg, frame, padPx: framePadPx });
           ctx.restore();
         }
       }
