@@ -2590,6 +2590,33 @@
                         </button>
                       </div>
                     </div>
+                    <div class="field">
+                      <div class="lbl-row">
+                        <label class="lbl">Export size</label
+                        ><span class="lbl-val" id="sz-val">Natural</span>
+                      </div>
+                      <div class="seg" id="seg-size" data-target="opt-size">
+                        <button
+                          type="button"
+                          class="seg-btn active"
+                          data-v="auto"
+                        >
+                          AUTO
+                        </button>
+                        <button type="button" class="seg-btn" data-v="256">
+                          256
+                        </button>
+                        <button type="button" class="seg-btn" data-v="512">
+                          512
+                        </button>
+                        <button type="button" class="seg-btn" data-v="1024">
+                          1K
+                        </button>
+                        <button type="button" class="seg-btn" data-v="2048">
+                          2K
+                        </button>
+                      </div>
+                    </div>
                     </div>
                   </div>
                 </div>
@@ -4453,6 +4480,7 @@
           bg: "#ffffff",
           bgTransparent: false,
           margin: 4,
+          exportSize: "auto",
           style: "square",
           ecl: "M",
           eye: "square",
@@ -4573,8 +4601,11 @@
         setSegValue("seg-style", state.opts.style);
         setSegValue("seg-eye", state.opts.eye || "square");
         setSegValue("seg-frame", state.opts.frame || "none");
+        const sz = state.opts.exportSize || "auto";
+        setSegValue("seg-size", String(sz));
         $("#opt-margin").value = state.opts.margin;
         $("#qz-val").textContent = state.opts.margin + " modules";
+        $("#sz-val").textContent = sz === "auto" ? "Natural" : sz + " px";
         // bc opts
         $("#bc-margin").value = state.bcOpts.margin;
         $("#bc-qz-val").textContent = state.bcOpts.margin + " px";
@@ -4595,11 +4626,18 @@
           bg: $("#opt-bg").value,
           bgTransparent: $("#opt-bg").dataset.transparent === "1",
           margin: parseInt($("#opt-margin").value, 10) || 0,
+          exportSize: getSegValue("seg-size", "auto"),
           style: getSegValue("seg-style", "square"),
           ecl: getSegValue("seg-ecl", "M"),
           eye: getSegValue("seg-eye", "square"),
           frame: getSegValue("seg-frame", "none"),
         };
+      }
+      // Returns a number (target px) or null when "auto" (export at native size).
+      function getExportSize() {
+        const v = getSegValue("seg-size", "auto");
+        if (v === "auto") return null;
+        return parseInt(v, 10) || null;
       }
       function collectBcOpts() {
         return {
@@ -4712,7 +4750,10 @@
             seg
               .querySelectorAll(".seg-btn")
               .forEach((b) => b.classList.toggle("active", b === btn));
-            scheduleRegen();
+            // Export size is applied only at download time — skip preview
+            // regen, but still persist so the choice survives reloads.
+            if (seg.id !== "seg-size") scheduleRegen();
+            else persistState();
           });
         });
       });
@@ -4798,6 +4839,14 @@
       $("#bc-modw").addEventListener("input", () => {
         $("#bc-mw-val").textContent = $("#bc-modw").value + " px";
       });
+      // Export size: read-only label update — does NOT trigger a re-render of
+      // the preview. Applied only at download/copy/print time.
+      $$("#seg-size .seg-btn").forEach((b) =>
+        b.addEventListener("click", () => {
+          $("#sz-val").textContent =
+            b.dataset.v === "auto" ? "Natural" : b.dataset.v + " px";
+        }),
+      );
       /* ---------- logo ---------- */
       $("#opt-logo").addEventListener("change", async (e) => {
         const file = e.target.files[0];
@@ -5132,9 +5181,29 @@
       function getPreviewCanvas() {
         return $("#preview-host canvas");
       }
+      // Returns a NEW canvas of size×size with `src` drawn into it (square).
+      // Used to apply the Export Size setting without touching the live preview.
+      function scaleCanvas(src, size) {
+        const out = document.createElement("canvas");
+        out.width = size;
+        out.height = size;
+        const ctx = out.getContext("2d");
+        // Nearest-neighbor scaling preserves crisp module edges, matching the
+        // preview's `image-rendering: pixelated`.
+        ctx.imageSmoothingEnabled = false;
+        ctx.drawImage(src, 0, 0, size, size);
+        return out;
+      }
+      function exportCanvas() {
+        const c = getPreviewCanvas();
+        if (!c) return null;
+        const size = getExportSize();
+        // AUTO: return the live canvas unchanged (no scaling, native bitmap).
+        return size ? scaleCanvas(c, size) : c;
+      }
 
       $("#btn-png").addEventListener("click", () => {
-        const c = getPreviewCanvas();
+        const c = exportCanvas();
         if (!c) return toast("Nothing to download", "err");
         c.toBlob(
           (b) =>
@@ -5146,11 +5215,16 @@
         );
       });
       $("#btn-svg").addEventListener("click", () => {
+        const size = getExportSize();
+        // AUTO: leave the SVG vector-only (no intrinsic width/height —
+        // consumers render at their own scale). Otherwise pin width/height.
+        const sizeAttrs = size ? ` width="${size}" height="${size}"` : "";
+        const inject = (svg) =>
+          sizeAttrs ? svg.replace("<svg ", `<svg${sizeAttrs} `) : svg;
         if (state.format === "barcode") {
           if (!state.lastBC) return toast("Nothing to download", "err");
-          const svg = renderBarcodeSVG(
-            state.lastBC,
-            currentBarcodeRenderOpts(),
+          const svg = inject(
+            renderBarcodeSVG(state.lastBC, currentBarcodeRenderOpts()),
           );
           downloadBlob(
             new Blob([svg], { type: "image/svg+xml" }),
@@ -5158,12 +5232,12 @@
           );
         } else {
           if (!state.lastQR) return toast("Nothing to download", "err");
-          const svg = renderQRtoSVG(state.lastQR, currentRenderOpts());
+          const svg = inject(renderQRtoSVG(state.lastQR, currentRenderOpts()));
           downloadBlob(new Blob([svg], { type: "image/svg+xml" }), "qr.svg");
         }
       });
       $("#btn-copy-img").addEventListener("click", async () => {
-        const c = getPreviewCanvas();
+        const c = exportCanvas();
         if (!c) return toast("Nothing to copy", "err");
         try {
           const blob = await new Promise((r) => c.toBlob(r, "image/png"));
@@ -5176,7 +5250,7 @@
         }
       });
       $("#btn-print").addEventListener("click", () => {
-        const c = getPreviewCanvas();
+        const c = exportCanvas();
         if (!c) return toast("Nothing to print", "err");
         const url = c.toDataURL("image/png");
         const w = window.open("");
