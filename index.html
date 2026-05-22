@@ -1522,7 +1522,7 @@
           gap: 32px;
         }
         .types {
-          grid-template-columns: repeat(4, 1fr);
+          grid-template-columns: repeat(5, 1fr);
         }
         .batch-input-row {
           grid-template-columns: 1fr;
@@ -1531,12 +1531,85 @@
           grid-template-columns: 1fr 1fr;
         }
       }
-      @media (max-width: 580px) {
+      @media (max-width: 720px) {
+        aside.rail {
+          flex-wrap: wrap;
+          padding: 12px 16px;
+          gap: 10px;
+        }
+        .brand {
+          gap: 10px;
+        }
+        .brand-mark {
+          width: 30px;
+          height: 30px;
+        }
+        .nav-list {
+          width: 100%;
+          flex: 0 0 100%;
+          justify-content: space-between;
+          gap: 2px;
+          order: 2;
+        }
+        .nav-btn {
+          grid-template-columns: 1fr;
+          gap: 2px;
+          padding: 6px 6px;
+          font-size: 10px;
+          letter-spacing: 0.08em;
+          text-align: center;
+          justify-items: center;
+          flex: 1;
+        }
+        .nav-btn .num {
+          display: none;
+        }
+        main {
+          padding: 22px 16px 60px;
+        }
+        .section-head {
+          flex-wrap: wrap;
+          gap: 10px 14px;
+          margin-bottom: 22px;
+          padding-bottom: 14px;
+        }
+        .section-head h1 {
+          font-size: 19px;
+        }
+        .section-head .crumb {
+          margin-left: 0;
+          width: 100%;
+          order: 3;
+          font-size: 9.5px;
+          letter-spacing: 0.14em;
+        }
+        .format-toggle {
+          margin-left: auto;
+        }
         .types {
-          grid-template-columns: repeat(2, 1fr);
+          grid-template-columns: repeat(5, 1fr);
+        }
+        .type-pill {
+          padding: 8px 2px;
+        }
+        .type-pill .ico {
+          font-size: 13px;
+          margin-bottom: 4px;
+          height: 16px;
+        }
+        .type-pill .ico svg {
+          width: 16px;
+          height: 16px;
+        }
+        .type-pill .lbl {
+          font-size: 9.5px;
+          letter-spacing: 0.04em;
         }
         .field-row-2,
         .field-row-3 {
+          grid-template-columns: 1fr;
+        }
+        .batch-controls {
           grid-template-columns: 1fr;
         }
         .meta-strip {
@@ -1552,8 +1625,109 @@
         .meta-strip .cell:nth-last-child(-n + 2) {
           border-bottom: 0;
         }
+        .actions.four {
+          grid-template-columns: 1fr 1fr;
+        }
         .actions.five {
           grid-template-columns: repeat(3, 1fr);
+        }
+        .preview-canvas-host.empty {
+          width: 240px;
+          height: 240px;
+        }
+        body.fmt-barcode .preview-canvas-host.empty {
+          width: 100%;
+          max-width: 360px;
+          height: 120px;
+        }
+        .preview-frame {
+          padding: 18px;
+          max-width: 100%;
+        }
+        .batch-grid {
+          grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        }
+        .saved-item {
+          grid-template-columns: 48px 1fr;
+          gap: 12px 14px;
+        }
+        .saved-item .thumb {
+          width: 48px;
+          height: 48px;
+        }
+        .saved-item .acts {
+          grid-column: 1 / -1;
+          justify-content: flex-end;
+          flex-wrap: wrap;
+        }
+        .video-wrap {
+          aspect-ratio: 1 / 1;
+        }
+        .modal {
+          padding: 16px;
+        }
+        .modal-card {
+          min-width: 0;
+          width: 100%;
+          padding: 18px 20px;
+        }
+        .kbd-list {
+          grid-template-columns: auto 1fr;
+          gap: 8px 16px;
+          font-size: 12px;
+        }
+      }
+      @media (max-width: 440px) {
+        aside.rail {
+          padding: 10px 12px;
+        }
+        main {
+          padding: 18px 12px 56px;
+        }
+        .section-head h1 {
+          font-size: 17px;
+        }
+        .ft-btn {
+          padding: 5px 9px;
+          font-size: 10px;
+        }
+        .types {
+          grid-template-columns: repeat(5, 1fr);
+          gap: 2px;
+          padding: 3px;
+        }
+        .type-pill .lbl {
+          font-size: 8.5px;
+          letter-spacing: 0.02em;
+        }
+        .seg-btn {
+          font-size: 10.5px;
+          padding: 6px 4px;
+        }
+        .seg-btn .seg-sub {
+          font-size: 8.5px;
+        }
+        .actions.three,
+        .actions.four {
+          grid-template-columns: 1fr 1fr;
+        }
+        .actions.five {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .btn {
+          padding: 9px 8px;
+          font-size: 11.5px;
+        }
+        .preview-canvas-host.empty {
+          width: 100%;
+          max-width: 220px;
+          height: 220px;
+        }
+        .batch-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .library-grid {
+          grid-template-columns: 1fr;
         }
       }
     </style>
